@@ -1,5 +1,12 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: 马琳峰
+ * @Date: 2021-01-04 08:58:48
+ * @LastEditors: 马琳峰
+ * @LastEditTime: 2021-01-04 11:23:18
+ */
 import request from "@/utils/request";
-
 
 /**
  * @name 获取公共文章列表
@@ -16,7 +23,6 @@ export const getArticle = params => {
         params
     })
 }
-
 
 /**
  * @name 获取关注用户文章列表
@@ -36,7 +42,7 @@ export const getFeedArticle = params => {
 
 /** 
  * @name 添加点赞
- * @param {String} slug  
+ * @param {String} slug  文章标识
 */
 
 export const addFavorite = slug => {
@@ -46,10 +52,9 @@ export const addFavorite = slug => {
     })
 }
 
-
 /** 
  * @name 取消点赞
- * @param {String} slug  
+ * @param {String} slug  文章标识
 */
 export const deleteFavorite = slug => {
     return request({
@@ -60,7 +65,7 @@ export const deleteFavorite = slug => {
 
 /**
  * @name  获取文章详情
- * @param {String} slug 
+ * @param {String} slug 文章标识
  */
 export const getArticleDetails = slug => {
     return request({
@@ -69,10 +74,9 @@ export const getArticleDetails = slug => {
     })
 } 
 
-
 /**
  * @name  获取评论详情
- * @param {String} slug 
+ * @param {String} slug 文章标识
  */
 export const getComments = slug => {
     return request({
@@ -81,3 +85,20 @@ export const getComments = slug => {
     })
 } 
 
+/**
+ * @name  创建文章
+ * @param {String} data.title 标题
+ * @param {String} data.description 描述
+ * @param {String} data.body 正文
+ * @param {Array[String]} data.tagList 标签列表
+ * 
+ */
+export const createArticle = data => {
+    return request({
+        method: 'POST',
+        url: `/api/articles`,
+        data:{
+            article: data,
+        }
+    })
+} 

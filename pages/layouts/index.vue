@@ -1,9 +1,17 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: 马琳峰
+ * @Date: 2021-01-04 08:58:48
+ * @LastEditors: 马琳峰
+ * @LastEditTime: 2021-01-04 15:14:07
+-->
 <template>
   <div>
     <!-- header -->
     <nav class="navbar navbar-light">
       <div class="container">
-        <a class="navbar-brand" href="index.html">conduit</a>
+        <nuxt-link class="navbar-brand" to="/">conduit</nuxt-link>
         <ul class="nav navbar-nav pull-xs-right">
           <li class="nav-item">
             <!-- Add "active" class when you're on that page" -->

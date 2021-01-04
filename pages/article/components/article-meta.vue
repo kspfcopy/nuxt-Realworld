@@ -1,48 +1,74 @@
 <template>
-  <div class="article-meta">
-    <nuxt-link :to="{
-        name: 'profile',
-        params:{
-            username: article.author.username 
-        }
-    }"><img :src="article.author.image" /></nuxt-link>
-    <div class="info">
-      <nuxt-link :to="{
-        name: 'profile',
-        params:{
-            username: article.author.username 
-        }
-    }" class="author">{{ article.author.username }}</nuxt-link>
-      <span class="date">{{ article.updatedAt | date('MMM DD, YYYY') }}</span>
+    <div class="article-meta">
+        <nuxt-link
+            :to="{
+                name: 'profile',
+                params: {
+                    username: article.author.username,
+                },
+            }"
+            ><img :src="article.author.image"
+        /></nuxt-link>
+        <div class="info">
+            <nuxt-link
+                :to="{
+                    name: 'profile',
+                    params: {
+                        username: article.author.username,
+                    },
+                }"
+                class="author"
+                >{{ article.author.username }}</nuxt-link
+            >
+            <span class="date">{{
+                article.updatedAt | date('MMM DD, YYYY')
+            }}</span>
+        </div>
+        <button
+            class="btn btn-sm btn-outline-secondary"
+            :class="{
+                active: article.author.following,
+            }"
+            :disabled="article.followdisabled"
+            @click="onFollow"
+        >
+            <i class="ion-plus-round"></i>
+            {{article.author.following ? 'Unfollow' : 'Follow'}} {{article.author.username}}
+        </button>
+        <button
+            class="btn btn-sm btn-outline-primary"
+            :class="{
+                active: article.favorited,
+            }"
+            :disabled="article.favoritedisabled"
+            @click="onFavorite"
+        >
+            <i class="ion-heart"></i>
+            &nbsp; Favorite Post
+            <span class="counter">({{ article.favoritesCount }})</span>
+        </button>
     </div>
-    <button class="btn btn-sm btn-outline-secondary"
-     :class="{
-            active: article.author.following
-        }">
-      <i class="ion-plus-round"></i>
-      &nbsp; Follow Eric Simons <span class="counter">(10)</span>
-    </button>
-    &nbsp;&nbsp;
-    <button class="btn btn-sm btn-outline-primary"
-        :class="{
-            active: article.favorited
-        }"
-    >
-      <i class="ion-heart"></i>
-      &nbsp; Favorite Post <span class="counter">({{article.favoritesCount  }})</span>
-    </button>
-  </div>
 </template>
 
 <script>
 export default {
     name: 'article-meta',
-    props:{
-        article:{
-            type:Object,
+    props: {
+        article: {
+            type: Object,
             required: true,
+        },
+    },
+    methods: {
+        // 点赞 
+        onFavorite() {
+          this.$emit('onFavorite')
+        },
+        // 关注
+        onFollow(){
+          this.$emit('onFollow')
         }
-    }
+    },
 };
 </script>
 
