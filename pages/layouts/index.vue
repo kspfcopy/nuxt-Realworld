@@ -4,7 +4,7 @@
  * @Author: 马琳峰
  * @Date: 2021-01-04 08:58:48
  * @LastEditors: 马琳峰
- * @LastEditTime: 2021-01-04 15:14:07
+ * @LastEditTime: 2021-01-04 17:31:38
 -->
 <template>
   <div>
@@ -30,10 +30,15 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link">
+              <nuxt-link :to="{
+                name: 'profile',
+                params:{
+                  username: user.username
+                }
+              }"  class="nav-link">
               <img class="user-pic" :src="user.image">
               {{user.username}}
-            </a>
+            </nuxt-link>
             </li>
           </template>
           <template v-else>

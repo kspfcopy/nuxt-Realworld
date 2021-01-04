@@ -4,7 +4,7 @@
  * @Author: 马琳峰
  * @Date: 2021-01-04 08:58:48
  * @LastEditors: 马琳峰
- * @LastEditTime: 2021-01-04 15:36:21
+ * @LastEditTime: 2021-01-04 18:32:40
  */
 import request from "@/utils/request";
 
@@ -73,5 +73,17 @@ export const updateUserProfile = data => {
         data: {
             user: data
         }
+    })
+}
+
+
+/**
+ * @name 获取用户资料
+ * 
+ */
+export const getProfile = username => {
+    return request({
+        method: 'GET',
+        url: `/api/profiles/${encodeURI(username)}`,
     })
 }

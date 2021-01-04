@@ -4,7 +4,7 @@
  * @Author: 马琳峰
  * @Date: 2021-01-04 08:58:48
  * @LastEditors: 马琳峰
- * @LastEditTime: 2021-01-04 16:02:57
+ * @LastEditTime: 2021-01-04 18:17:26
  */
 // 
 
@@ -37,7 +37,7 @@ export default {
                             component: resolve(__dirname, 'pages/login'),
                         },
                         {
-                            path: '/profile/:username',
+                            path: '/profile/:username/:favorites?',
                             name: 'profile',
                             component: resolve(__dirname, 'pages/profile'),
                         },
