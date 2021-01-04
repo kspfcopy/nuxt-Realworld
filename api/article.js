@@ -4,7 +4,7 @@
  * @Author: 马琳峰
  * @Date: 2021-01-04 08:58:48
  * @LastEditors: 马琳峰
- * @LastEditTime: 2021-01-04 16:22:26
+ * @LastEditTime: 2021-01-04 17:02:07
  */
 import request from "@/utils/request";
 
@@ -131,5 +131,36 @@ export const deleteArticle = slug => {
     return request({
         method: 'DELETE',
         url: `/api/articles/${slug}`,
+    })
+} 
+
+/**
+ * @name  添加文章评论
+ * @param {String} data.slug 文章唯一标识
+ * @param {String} data.body 评论内容
+ * 
+ */
+export const addCommentsToArticle = data => {
+    return request({
+        method: 'POST',
+        url: `/api/articles/${data.slug}/comments`,
+        data: {
+            comment:{
+                body: data.body
+            }
+        }
+    })
+} 
+
+/**
+ * @name  删除文章评论
+ * @param {String} data.slug 文章唯一标识
+ * @param {String} data.id 评论id 
+ * 
+ */
+export const deleteComments = data => {
+    return request({
+        method: 'DELETE',
+        url: `/api/articles/${data.slug}/comments/${data.id}`,
     })
 } 
