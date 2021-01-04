@@ -4,7 +4,7 @@
  * @Author: 马琳峰
  * @Date: 2021-01-04 08:58:48
  * @LastEditors: 马琳峰
- * @LastEditTime: 2021-01-04 14:02:48
+ * @LastEditTime: 2021-01-04 16:29:22
 -->
 <template>
     <div class="editor-page">
@@ -71,13 +71,10 @@
 </template>
 
 <script>
-import { createArticle } from '@/api/article'
+import { createArticle, updateArticle, getArticleDetails } from '@/api/article'
 export default {
   middleware: 'isLogin',
   name: 'editor',
-  async asyncData({ params }){
-    
-  },
   data () {
     return {
       "article":{
@@ -88,14 +85,31 @@ export default {
       },
       "tag": "",//
       "disabled": false,
-      "errors": []
+      "errors": [],
+      "slug": this.$route.params.slug
+    }
+  },
+  computed:{
+    isEditor(){
+      return  this.$route.params.slug ? true : false
+    }
+  },
+  async created(){
+    if( this.isEditor ) {
+      const { data } =  await getArticleDetails(this.slug);
+      for (let key in this.article) {
+        this.article[key] = data.article[key];
+      }
     }
   },
   methods:{
     async onUseArticle(event){
       try {
         this.disabled = true;
-        const { data } = await createArticle(this.article);
+
+        const useIsFuncion = this.isEditor ? updateArticle : createArticle;
+
+        const { data } = await useIsFuncion(this.article);
        
         this.$router.push({
           name: "article",
@@ -119,7 +133,8 @@ export default {
     createTag(event){
       event.preventDefault();
       let tag = this.tag;
-      if(this.article.tagList.indexOf(tag) != -1) return;
+      if(this.article.tagList.indexOf(tag) != -1 || !tag) return;
+      this.tag = "";
       this.article.tagList.push(tag);
     }
   }

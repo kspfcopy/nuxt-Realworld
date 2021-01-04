@@ -4,7 +4,7 @@
  * @Author: 马琳峰
  * @Date: 2021-01-04 08:58:48
  * @LastEditors: 马琳峰
- * @LastEditTime: 2021-01-04 09:55:27
+ * @LastEditTime: 2021-01-04 16:02:57
  */
 // 
 
@@ -47,7 +47,7 @@ export default {
                             component: resolve(__dirname, 'pages/settings'),
                         },
                         {
-                            path: '/editor',
+                            path: '/editor/:slug?',
                             name: 'editor',
                             component: resolve(__dirname, 'pages/editor'),
                         },

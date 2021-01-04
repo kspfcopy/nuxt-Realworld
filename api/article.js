@@ -4,7 +4,7 @@
  * @Author: 马琳峰
  * @Date: 2021-01-04 08:58:48
  * @LastEditors: 马琳峰
- * @LastEditTime: 2021-01-04 11:23:18
+ * @LastEditTime: 2021-01-04 16:22:26
  */
 import request from "@/utils/request";
 
@@ -100,5 +100,36 @@ export const createArticle = data => {
         data:{
             article: data,
         }
+    })
+} 
+
+/**
+ * @name  更新文章
+ * @param {String} data.title 标题
+ * @param {String} data.description 描述
+ * @param {String} data.body 正文
+ * @param {Array[String]} data.tagList 标签列表
+ * 
+ */
+export const updateArticle = data => {
+    return request({
+        method: 'PUT',
+        url: `/api/articles/:slug`,
+        data:{
+            article: data,
+        }
+    })
+} 
+
+
+/**
+ * @name  删除文章
+ * @param {String} slug 文章唯一标识
+ * 
+ */
+export const deleteArticle = slug => {
+    return request({
+        method: 'DELETE',
+        url: `/api/articles/${slug}`,
     })
 } 

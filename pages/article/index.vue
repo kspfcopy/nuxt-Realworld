@@ -4,7 +4,7 @@
  * @Author: 马琳峰
  * @Date: 2021-01-04 08:58:48
  * @LastEditors: 马琳峰
- * @LastEditTime: 2021-01-04 14:58:38
+ * @LastEditTime: 2021-01-04 16:27:20
 -->
 <template>
     <div class="article-page">
@@ -15,6 +15,7 @@
                 <article-meta
                     @onFavorite="onFavorite"
                     @onFollow="onFollow"
+                    @deleteArticle="deleteArticle"
                     :article="article"
                 ></article-meta>
             </div>
@@ -25,12 +26,17 @@
                 <div class="col-md-12" v-html="article.body"></div>
             </div>
 
+            <ul class="tag-list">
+                <li class="tag-default tag-pill tag-outline ng-binding ng-scope" v-for="tag in article.tagList" :key="tag">{{tag}}</li>
+            </ul>
+
             <hr />
 
             <div class="article-actions">
                 <article-meta
                     @onFavorite="onFavorite"
                     @onFollow="onFollow"
+                    @deleteArticle="deleteArticle"
                     :article="article"
                 ></article-meta>
             </div>
@@ -41,7 +47,7 @@
 </template>
 
 <script>
-import { getArticleDetails, addFavorite, deleteFavorite } from '@/api/article';
+import { getArticleDetails, addFavorite, deleteArticle, deleteFavorite } from '@/api/article';
 import { addFollow, deleteFollow } from '@/api/user';
 import articleMeta from './components/article-meta';
 import articleComments from './components/article-comments';
@@ -54,6 +60,7 @@ export default {
         const { article } = data;
         article.favoritedisabled = false;
         article.followdisabled = false;
+        article.deleteing = false;
         const md = new MarkdownIt();
         article.body = md.render(article.body);
         return {
@@ -105,6 +112,12 @@ export default {
             }
             this.article.followdisabled = false;
         },
+        async deleteArticle(){
+            this.article.deleteing = true;
+            await deleteArticle(this.article.slug);
+            this.$router.push("/");
+            this.article.deleteing = false;
+        }
     },
 };
 </script>
