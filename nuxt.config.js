@@ -1,3 +1,11 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: 马琳峰
+ * @Date: 2021-01-04 08:58:48
+ * @LastEditors: 马琳峰
+ * @LastEditTime: 2021-01-04 09:55:27
+ */
 // 
 
 export default {
@@ -57,7 +65,7 @@ export default {
         '~/plugins/request.js',
         '~/plugins/day.js'
     ],
-    serve:{
+    server:{
         host: '0.0.0.0',
         port: 3000
     }
