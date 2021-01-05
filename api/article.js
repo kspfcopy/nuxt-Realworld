@@ -4,7 +4,7 @@
  * @Author: 马琳峰
  * @Date: 2021-01-04 08:58:48
  * @LastEditors: 马琳峰
- * @LastEditTime: 2021-01-04 17:02:07
+ * @LastEditTime: 2021-01-05 15:05:34
  */
 import request from "@/utils/request";
 
@@ -114,9 +114,9 @@ export const createArticle = data => {
 export const updateArticle = data => {
     return request({
         method: 'PUT',
-        url: `/api/articles/:slug`,
+        url: `/api/articles/${data.slug}`,
         data:{
-            article: data,
+            article: {...data},
         }
     })
 } 

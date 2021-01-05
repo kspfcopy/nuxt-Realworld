@@ -4,7 +4,7 @@
  * @Author: 马琳峰
  * @Date: 2021-01-04 08:58:48
  * @LastEditors: 马琳峰
- * @LastEditTime: 2021-01-05 14:08:33
+ * @LastEditTime: 2021-01-05 15:01:05
 -->
 <template>
     <div class="profile-page">
@@ -62,7 +62,6 @@
                             <li class="nav-item">
                                 <nuxt-link
                                     class="nav-link"
-                                    exact
                                     :to="{
                                         name: 'profile',
                                         params: {
@@ -74,6 +73,11 @@
                                 >
                             </li>
                         </ul>
+                    </div>
+
+
+                    <div class="article-preview" v-show="articles <= 0">
+                        No articles are here... yet.
                     </div>
 
                     <div
@@ -222,6 +226,9 @@ export default {
         totalPage() {
             return Math.ceil(this.articlesCount / this.limit);
         },
+        isDeleteArticle(){
+            return this.$route.params.favorites === 'favorites'
+        }
     },
     methods: {
         async onFavorite(article) {

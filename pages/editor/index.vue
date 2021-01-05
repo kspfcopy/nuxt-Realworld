@@ -4,7 +4,7 @@
  * @Author: 马琳峰
  * @Date: 2021-01-04 08:58:48
  * @LastEditors: 马琳峰
- * @LastEditTime: 2021-01-04 16:29:22
+ * @LastEditTime: 2021-01-05 15:04:30
 -->
 <template>
     <div class="editor-page">
@@ -81,7 +81,8 @@ export default {
         "title": "",//标题
         "description": "", //描述
         "body": "", //正文
-        "tagList": []  //标签列表
+        "tagList": [],  //标签列表
+        "slug": this.$route.params.slug
       },
       "tag": "",//
       "disabled": false,

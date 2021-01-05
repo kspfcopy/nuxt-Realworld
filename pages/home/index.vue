@@ -60,6 +60,10 @@
             </ul>
           </div>
 
+          <div class="article-preview" v-show="articles <= 0">
+            No articles are here... yet.
+          </div>
+
           <div
             class="article-preview"
             v-for="article in articles"
@@ -212,9 +216,10 @@ export default {
       page,
       tags,
       tag,
-      tab
+      tab,
     };
   },
+  
   computed: {
     ...mapState(["user"]),
     totalPage() {
