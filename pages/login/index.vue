@@ -46,7 +46,7 @@
                 placeholder="Password"
               />
             </fieldset>
-            <button class="btn btn-lg btn-primary pull-xs-right">
+            <button :disabled="logining" class="btn btn-lg btn-primary pull-xs-right">
               {{ isLogin ? "Sign in" : "Sign up" }}
             </button>
           </form>
@@ -76,12 +76,14 @@ export default {
         password: "",
       },
       errors: {}, // 错误信息
+      logining: false,
     };
   },
   methods: {
     //监听表单提交请求
     async onSubmit() {
       try {
+        this.logining = true;
         const { data } = this.isLogin
           ? await login({
               user: this.user,
@@ -97,6 +99,8 @@ export default {
         this.$router.push("/");
       } catch (err) {
         this.errors = err.response.data.errors;
+      } finally{
+        this.logining = false;
       }
     },
   },

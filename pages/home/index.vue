@@ -66,7 +66,6 @@
             :key="article.slug"
           >
             <div class="article-meta">
-              <a href="profile.html"> </a>
               <nuxt-link
                 :to="{
                   name: 'profile',

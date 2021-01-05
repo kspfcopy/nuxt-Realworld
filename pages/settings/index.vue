@@ -4,7 +4,7 @@
  * @Author: 马琳峰
  * @Date: 2021-01-04 08:58:48
  * @LastEditors: 马琳峰
- * @LastEditTime: 2021-01-04 15:49:11
+ * @LastEditTime: 2021-01-05 14:27:25
 -->
 <template>
     <div class="settings-page">
@@ -78,6 +78,11 @@
                             </button>
                         </fieldset>
                     </form>
+                    <hr>
+
+                    <button class="btn btn-outline-danger" @click="logout()">
+                        Or click here to logout.
+                    </button>
                 </div>
             </div>
         </div>
@@ -85,7 +90,10 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import { updateUserProfile } from '@/api/user';
+// 仅在客户端加载js-cookie包
+const Cookie = process.client ? require("js-cookie") : undefined;
 export default {
     middleware: 'isLogin',
     name: 'settings',
@@ -106,13 +114,20 @@ export default {
         async updateUserProfile() {
             try {
                 this.disabled = true;
-                await updateUserProfile(this.user);
+                const { data } = await updateUserProfile(this.user);
+                this.setUser(data.user)
                 this.disabled = false;
             } catch (err) {
                 this.errors = err.response.data.errors;
                 this.disabled = false;
             }
         },
+        async logout(){
+            Cookie.remove('user');
+            this.setUser(null);
+            this.$router.push("/")
+        },
+        ...mapMutations(['setUser'])
     },
 };
 </script>
